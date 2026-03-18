@@ -11,18 +11,32 @@ interface CategoryData {
     slug: string;
     description: string;
     icon: string;
-    playlists: any[];
-    articles: any[];
+    playlists: Playlist[];
+    articles?: Article[];
 }
 
+interface Playlist {
+    title: string;
+    creator: string;
+    url: string;
+    language: string;
+    difficulty: "beginner" | "intermediate" | "advanced";
+    videoCount: number;
+    description: string;
+    year: number;
+}
 
+interface Article {
+    title: string;
+    url: string;
+}
 
 async function getCategoryData(slug: string): Promise<CategoryData | null> {
     try {
         const filePath = path.join(process.cwd(), "data", `${slug}.json`);
         const fileContents = await fs.readFile(filePath, "utf8");
         return JSON.parse(fileContents);
-    } catch (error) {
+    } catch {
         return null;
     }
 }

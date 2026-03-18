@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
 import { ContributorCard } from "@/components/ContributorCard";
+import type { LucideIcon } from "lucide-react";
 
 interface Contributor {
   login: string;
@@ -17,14 +18,29 @@ interface Contributor {
   isNew?: boolean;
 }
 
+interface ContributorFilterOption {
+  id: "all" | "new" | "top" | "owner";
+  label: string;
+  icon?: LucideIcon;
+  color?: string;
+}
+
 const REPO_OWNER = "Tanay2920003";
 const REPO_NAME = "Learning-hub";
+const FILTERS: ContributorFilterOption[] = [
+  { id: "all", label: "All" },
+  { id: "new", label: "New", icon: Rocket, color: "text-blue-400" },
+  { id: "top", label: "Top Contributors", icon: Trophy, color: "text-yellow-400" },
+  { id: "owner", label: "Owner", icon: ShieldAlert, color: "text-emerald-400" }
+] as const;
+
+type ContributorFilter = (typeof FILTERS)[number]["id"];
 
 export default function ContributorsPage() {
   const [contributors, setContributors] = useState<Contributor[]>([]);
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
-  const [activeFilter, setActiveFilter] = useState<"all" | "new" | "owner" | "top">("all");
+  const [activeFilter, setActiveFilter] = useState<ContributorFilter>("all");
   const [visibleCount, setVisibleCount] = useState(12);
 
   useEffect(() => {
@@ -118,16 +134,11 @@ export default function ContributorsPage() {
           </div>
 
           <div className="flex flex-wrap gap-2">
-            {[
-              { id: "all", label: "All" },
-              { id: "new", label: "New", icon: Rocket, color: "text-blue-400" },
-              { id: "top", label: "Top Contributors", icon: Trophy, color: "text-yellow-400" },
-              { id: "owner", label: "Owner", icon: ShieldAlert, color: "text-emerald-400" }
-            ].map((filter) => (
+            {FILTERS.map((filter) => (
               <Button
                 key={filter.id}
                 variant={activeFilter === filter.id ? "secondary" : "outline"}
-                onClick={() => setActiveFilter(filter.id as any)}
+                onClick={() => setActiveFilter(filter.id)}
                 className={`rounded-full border-slate-800 ${activeFilter === filter.id ? 'bg-slate-800 text-white' : 'bg-transparent text-slate-400 hover:bg-slate-900'}`}
               >
                 {filter.icon && <filter.icon className={`mr-2 h-3.5 w-3.5 ${filter.color}`} />}
@@ -168,4 +179,3 @@ export default function ContributorsPage() {
     </div>
   );
 }
-

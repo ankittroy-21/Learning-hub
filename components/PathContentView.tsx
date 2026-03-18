@@ -108,7 +108,7 @@ export function PathContentView({ playlists, articles }: PathContentProps) {
               <TimelineView playlists={filteredPlaylists} />
             ) : (
               <div className="text-center py-20 text-slate-500">
-                No playlists found for "{searchQuery}"
+                No playlists found for &quot;{searchQuery}&quot;
               </div>
             )}
           </motion.div>
@@ -124,7 +124,7 @@ export function PathContentView({ playlists, articles }: PathContentProps) {
               <ArticleGridView articles={filteredArticles} />
             ) : (
               <div className="text-center py-20 text-slate-500">
-                No articles found for "{searchQuery}"
+                No articles found for &quot;{searchQuery}&quot;
               </div>
             )}
           </motion.div>
