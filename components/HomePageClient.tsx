@@ -24,14 +24,14 @@ export function HomePageClient({ learningPaths }: { learningPaths: LearningPathS
 
           <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold tracking-tighter text-white mb-6 leading-[1.15] sm:leading-[1.1]">
             <TypewriterEffect
-              words={["Learn", "Build", "Explore"]}
+              words={["Study", "Build", "Explore"]}
               typingSpeed={150}
               erasingSpeed={80}
               pauseDuration={1500}
               className="text-slate-200"
             />
             <br className="hidden sm:block" />
-            <span className="text-slate-200">in One Open Hub.</span>
+            <span className="text-slate-200">in Learning Hub</span>
           </h1>
 
           <p className="text-base sm:text-lg md:text-xl text-slate-400 mb-12 max-w-2xl font-light px-2">
